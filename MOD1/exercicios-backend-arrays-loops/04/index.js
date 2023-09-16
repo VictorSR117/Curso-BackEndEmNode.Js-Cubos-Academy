@@ -1,0 +1,1 @@
+for (let index = 0; index <= 500; index++) index % 3 === 0 ? console.log(index) : false;

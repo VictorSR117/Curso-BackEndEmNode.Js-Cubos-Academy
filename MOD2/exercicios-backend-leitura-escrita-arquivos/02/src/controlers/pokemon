@@ -1,0 +1,46 @@
+const { listarPokemons, detalharPokemon } = require("utils-playground");
+
+// Rota para listar todos os Pokémons
+const listPokemons = async (request, response) => {
+    let page = request.query.page;
+    try {
+        const pokemons = await listarPokemons(page ?? 1);
+        // A função listarPokemons retorna um objeto com a propriedade "results" que contém os Pokémons.
+        response.json(pokemons.results);
+    }
+    catch (error) {
+        console.error(error);
+        response.status(500).json({ mensagem: "Erro ao listar Pokémons." });
+    }
+};
+
+// Rota para detalhar um Pokémon com base em seu ID ou nome
+const detailPokemon = async (request, response) => {
+    try {
+        const idOrName = request.params.idpokemon;
+        const pokemon = await detalharPokemon(idOrName);
+
+        // Filtrando as propriedades desejadas do objeto retornado pela função detalharPokemon
+        const { id, name, height, weight, base_experience, forms, abilities, species } = pokemon;
+
+        response.json({
+            id,
+            name,
+            height,
+            weight,
+            base_experience,
+            forms,
+            abilities,
+            species,
+        });
+    }
+    catch (error) {
+        console.error(error);
+        response.status(500).json({ mensagem: "Erro ao detalhar o Pokémon." });
+    }
+};
+
+module.exports = {
+    listPokemons,
+    detailPokemon,
+};
