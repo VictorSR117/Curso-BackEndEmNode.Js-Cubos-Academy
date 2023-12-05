@@ -1,0 +1,10 @@
+comando a revisar se necessário
+
+Select
+Distinct
+Where
+Limit e Offset
+Order By
+Like e ilike
+
+
