@@ -1,0 +1,2 @@
+const verifyIfTransactionExistis = async (transaction, response) => transaction.length < 1 ? await response.status(404).json({ mensagem: "Transação não encontrada." }) : transaction;
+module.exports = verifyIfTransactionExistis;
